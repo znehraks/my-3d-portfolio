@@ -1,36 +1,19 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## DesignC의 포트폴리오 페이지
 
-## Getting Started
+#### Client 코드
 
-First, run the development server:
+- vanilla extract css로 스타일
+- Atomic Design, Compound Component Pattern
+- Threejs, R3F, @react-three/drei 를 활용
+- socket.io 활용
+- 컴포넌트 성격 별 fetching 방식 분리(클라이언트 컴포넌트 사용 최소화)
+  - Server Component
+    - react-query로 prefetch 후, 캐시처리
+  - Client Component
+    - 서버컴포넌트에서 prefetch된 쿼리 활용
+    - jotai로 ui만 건드리는 global state를 관리
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+#### Server 코드
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- 실시간 backend server는 기존에 존재하는 socket.io 활용
+- 비실시간 코드는 firebase로 간단히 구성
