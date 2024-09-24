@@ -1,8 +1,9 @@
 import { useRef } from 'react';
 import { OrbitControls as OrbitControlsClass } from 'three-stdlib';
 import { OrbitControls } from '@react-three/drei';
-import { GroundObjects } from './objects';
+import { GroundObjects } from './groundObjects/GroundObjects';
 import { GroundLights } from './Lights';
+import { GroundPlayer } from './groundPlayer/GroundPlayer';
 
 export function Map() {
   const controls = useRef<OrbitControlsClass>(null);
@@ -19,6 +20,16 @@ export function Map() {
       />
       <GroundLights />
       <GroundObjects />
+      <GroundPlayer
+        player={{
+          id: 'test-id',
+          nickname: 'test-nickname',
+          selectedCharacterGlbNameIndex: 0,
+          jobPosition: 'test-jobPosition',
+          position: [0, 0, 0],
+        }}
+        newPosition={[0, 0, 0]}
+      />
     </>
   );
 }

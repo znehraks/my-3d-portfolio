@@ -1,4 +1,4 @@
-import { groundMapSize } from '@/app/constants';
+import { groundMapSize } from '@/constants';
 import { useLoader } from '@react-three/fiber';
 import { useEffect } from 'react';
 import { RepeatWrapping, Texture, TextureLoader } from 'three';

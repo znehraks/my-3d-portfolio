@@ -4,7 +4,7 @@
 
 import { Canvas } from '@react-three/fiber';
 import { useEffect, useState } from 'react';
-import { Map } from './Map';
+import { Map } from './canvasComponents/Map';
 
 export function MainCanvas() {
   const [aspectRatio, setAspectRatio] = useState(window.innerWidth / window.innerHeight);
