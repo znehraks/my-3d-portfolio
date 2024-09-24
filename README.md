@@ -1,5 +1,7 @@
 ## DesignC의 포트폴리오 페이지
 
+
+### ToDo
 #### Client 코드
 
 - vanilla extract css로 스타일
@@ -12,6 +14,7 @@
   - Client Component
     - 서버컴포넌트에서 prefetch된 쿼리 활용
     - jotai로 ui만 건드리는 global state를 관리
+- Rust 코드를 활용하여 성능 개선이 가능한 부분부터 WASM 적용
 
 #### Server 코드
 
