@@ -4,6 +4,7 @@
 
 import { Canvas } from '@react-three/fiber';
 import { useEffect, useState } from 'react';
+import { Map } from './Map';
 
 export function MainCanvas() {
   const [aspectRatio, setAspectRatio] = useState(window.innerWidth / window.innerHeight);
@@ -29,10 +30,7 @@ export function MainCanvas() {
         position: [12, 12, 12],
       }}
     >
-      <mesh>
-        <meshBasicMaterial color="red" />
-        <boxGeometry args={[1, 1, 1]} />
-      </mesh>
+      <Map />
     </Canvas>
   );
 }
