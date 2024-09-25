@@ -7,15 +7,18 @@ import { useEffect, useState } from 'react';
 import { Map } from './canvasComponents/Map';
 
 export function MainCanvas() {
-  const [aspectRatio, setAspectRatio] = useState(window.innerWidth / window.innerHeight);
+  const [aspectRatio, setAspectRatio] = useState<number>();
 
   useEffect(() => {
     const handleResize = () => {
       setAspectRatio(window.innerWidth / window.innerHeight);
     };
+    handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  if (!aspectRatio) return null;
 
   return (
     <Canvas
