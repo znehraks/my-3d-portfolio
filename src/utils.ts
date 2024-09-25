@@ -9,3 +9,7 @@ export const calculateMinimapPosition = (originalPosition: Vector3) => {
     y: 4 * originalPosition.z - 5,
   };
 };
+
+export const isValidText = (text: string | undefined) => {
+  return Boolean(text && text.trim() !== '');
+};
