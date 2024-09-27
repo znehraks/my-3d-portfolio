@@ -5,6 +5,8 @@
 import { Canvas } from '@react-three/fiber';
 import { Map } from './canvasComponents/Map';
 import { CAMERA_DISTANCE } from '@/constants';
+import { Suspense } from 'react';
+import { Loader } from './htmlComponents/Loader';
 
 export function MainCanvas() {
   return (
@@ -19,7 +21,9 @@ export function MainCanvas() {
         position: [CAMERA_DISTANCE, CAMERA_DISTANCE, CAMERA_DISTANCE],
       }}
     >
-      <Map />
+      <Suspense fallback={<Loader />}>
+        <Map />
+      </Suspense>
     </Canvas>
   );
 }

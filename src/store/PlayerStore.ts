@@ -2,6 +2,11 @@ import { IChat, INotice, IPlayer, IPosition } from '@/types';
 import { atom } from 'jotai';
 
 /**
+ * 로딩이 완료되었는지 여부
+ */
+export const IsLoadCompletedAtom = atom(false);
+
+/**
  * 현재 선택된 캐릭터 종류
  */
 export const SelectedCharacterGlbNameIndexAtom = atom<number>(0);
