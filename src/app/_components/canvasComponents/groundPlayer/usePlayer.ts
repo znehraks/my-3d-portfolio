@@ -6,6 +6,7 @@ import { GLTF, SkeletonUtils } from 'three-stdlib';
 import { IPlayer, IPosition } from '@/types';
 import gsap from 'gsap';
 import { calculateMinimapPosition } from '@/utils';
+import { CAMERA_DISTANCE } from '@/constants';
 
 interface IUseGroundPlayer {
   player?: IPlayer;
@@ -108,7 +109,7 @@ export const useGroundPlayer = ({ player, newPosition, modelIndex }: IUseGroundP
     }
     camera.position
       .set(playerRef.current.position.x, playerRef.current.position.y + 10, playerRef.current.position.z)
-      .addScalar(60);
+      .addScalar(CAMERA_DISTANCE);
     camera.lookAt(playerRef.current.position);
   });
   return {

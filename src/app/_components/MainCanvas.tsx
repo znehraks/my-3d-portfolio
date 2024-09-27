@@ -4,6 +4,7 @@
 
 import { Canvas } from '@react-three/fiber';
 import { Map } from './canvasComponents/Map';
+import { CAMERA_DISTANCE } from '@/constants';
 
 export function MainCanvas() {
   return (
@@ -15,7 +16,7 @@ export function MainCanvas() {
         fov: 30,
         near: 0.01,
         far: 100000,
-        position: [60, 60, 60],
+        position: [CAMERA_DISTANCE, CAMERA_DISTANCE, CAMERA_DISTANCE],
       }}
     >
       <Map />

@@ -1,4 +1,4 @@
-import { groundMapSize } from '@/constants';
+import { GROUND_MAP_SIZE } from '@/constants';
 import { MyPositionAtom } from '@/store/PlayerStore';
 import { useLoader } from '@react-three/fiber';
 import { useSetAtom } from 'jotai';
@@ -30,7 +30,7 @@ export function Floor() {
         setMyPosition([e.point.x, 0, e.point.z]);
       }}
     >
-      <planeGeometry args={[groundMapSize, groundMapSize]} />
+      <planeGeometry args={[GROUND_MAP_SIZE, GROUND_MAP_SIZE]} />
       <meshStandardMaterial map={sandTexture} />
     </mesh>
   );

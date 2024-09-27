@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { layoutWrapperStyle } from './layout.css';
+import { Footer } from './_components/htmlComponents/Footer';
 
 export const metadata: Metadata = {
   title: 'znehraks portfolio',
@@ -16,6 +17,7 @@ export default function RootLayout({
     <html lang="ko">
       <body>
         <div className={layoutWrapperStyle}>{children}</div>
+        <Footer />
       </body>
     </html>
   );
