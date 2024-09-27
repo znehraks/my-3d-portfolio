@@ -30,7 +30,7 @@ export function MainCanvas() {
         aspect: aspectRatio,
         near: 0.01,
         far: 100000,
-        position: [12, 12, 12],
+        position: [48, 48, 48],
       }}
     >
       <Map />

@@ -66,9 +66,9 @@ export const useGroundPlayer = ({ player, newPosition, modelIndex }: IUseGroundP
         z: 0,
       },
       {
-        x: 1,
-        y: 1,
-        z: 1,
+        x: 2,
+        y: 2,
+        z: 2,
       },
     );
   }, [nodes, playerId, scene]);
