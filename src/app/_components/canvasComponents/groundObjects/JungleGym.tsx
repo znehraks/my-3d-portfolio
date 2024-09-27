@@ -4,10 +4,10 @@ import { Vector3 } from 'three';
 import { useShadow } from './useShadow';
 
 const name = 'ground-jungleGym';
-const scale = 1.5;
+const scale = 2;
 export function JungleGym() {
   const { scene } = useGLTF('/models/Jungle gym.glb');
-  const position = useMemo(() => new Vector3(-24, 0, 12), []);
+  const position = useMemo(() => new Vector3(-45, 0, 12), []);
 
   useShadow({ scene });
 

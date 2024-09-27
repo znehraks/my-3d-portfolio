@@ -12,5 +12,5 @@ export function Tree({ position }: { position: number[] }) {
 
   useShadow({ scene });
 
-  return <primitive visible name={name} scale={1} position={position} object={scene} />;
+  return <primitive visible name={name} scale={2} position={position} object={scene} />;
 }

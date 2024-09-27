@@ -4,10 +4,10 @@ import { Vector3 } from 'three';
 import { useShadow } from './useShadow';
 
 const name = 'ground-swing';
-const scale = 0.04;
+const scale = 0.1;
 export function Swing() {
   const { scene } = useGLTF('/models/Swing.glb');
-  const position = useMemo(() => new Vector3(18, 0, -10), []);
+  const position = useMemo(() => new Vector3(30, 0, -10), []);
 
   useShadow({ scene });
 

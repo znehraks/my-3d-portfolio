@@ -11,13 +11,13 @@ export function GroundObjects() {
     <>
       <Floor />
       <JungleGym />
-      <PineTrees position={[-30, 0, -30]} />
+      <PineTrees position={[-40, 0, -40]} />
       <Slide />
       <Swing />
-      <Tree position={[-9, 0, -8]} />
-      <Tree position={[2, 0, -10]} />
-      <Tree position={[-3, 0, 20]} />
-      <Tree position={[-8, 0, 22]} />
+      <Tree position={[0, 0, -30]} />
+      <Tree position={[2, 0, -20]} />
+      <Tree position={[-10, 0, 30]} />
+      <Tree position={[-4, 0, 40]} />
 
       {/* TODO Errorboundary  */}
       <Box position={[-20, 1.1, -15]} textureSrc="skill-react" />

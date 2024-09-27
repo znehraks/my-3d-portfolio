@@ -12,5 +12,5 @@ export function PineTrees({ position }: { position: number[] }) {
 
   useShadow({ scene });
 
-  return <primitive visible name={name} scale={15} position={position} rotation-y={Math.PI / 4} object={scene} />;
+  return <primitive visible name={name} scale={30} position={position} rotation-y={Math.PI / 4} object={scene} />;
 }
