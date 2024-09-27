@@ -18,7 +18,7 @@ export function GroundPlayer({
   modelIndex?: number;
 }) {
   const modelIndex = mIdx ?? player?.selectedCharacterGlbNameIndex;
-  const { playerRef, memoizedPosition, playerId, nodes, materials } = useGroundPlayer({
+  const { playerRef, playerLightRef, memoizedPosition, playerId, nodes, materials } = useGroundPlayer({
     player,
     newPosition,
     modelIndex,
@@ -26,7 +26,7 @@ export function GroundPlayer({
 
   return (
     <>
-      <GroundPlayerLights memoizedPosition={memoizedPosition} />
+      <GroundPlayerLights ref={playerLightRef} memoizedPosition={memoizedPosition} />
       <group
         ref={playerRef}
         position={memoizedPosition}

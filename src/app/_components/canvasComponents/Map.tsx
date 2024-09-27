@@ -1,22 +1,26 @@
+import { useAtomValue } from 'jotai';
+import { MyPositionAtom } from '@/store/PlayerStore';
 import { useRef } from 'react';
 import { OrbitControls as OrbitControlsClass } from 'three-stdlib';
 import { OrbitControls } from '@react-three/drei';
 import { GroundObjects } from './groundObjects/GroundObjects';
-import { GroundLights } from './Lights';
+import { GroundLights } from './GroundLights';
 import { GroundPlayer } from './groundPlayer/GroundPlayer';
+import { useAspectRatio } from '../useAspectRatio';
 
 export function Map() {
   const controls = useRef<OrbitControlsClass>(null);
+  useAspectRatio();
+  const myPosition = useAtomValue(MyPositionAtom);
+
   return (
     <>
       <OrbitControls
         ref={controls}
-        // minDistance={5}
-        // maxDistance={20}
-        // maxPolarAngle={Math.PI / 2.5}
-        // minPolarAngle={Math.PI / 4}
-        // maxAzimuthAngle={Math.PI / 2}
-        // minAzimuthAngle={0}
+        minDistance={5}
+        maxDistance={Math.sqrt(60 ** 2 + 60 ** 2 + 60 ** 2)}
+        maxPolarAngle={Math.PI / 2.75}
+        minPolarAngle={Math.PI / 4}
       />
       <GroundLights />
       <GroundObjects />
@@ -26,9 +30,9 @@ export function Map() {
           nickname: 'test-nickname',
           selectedCharacterGlbNameIndex: 0,
           jobPosition: 'test-jobPosition',
-          position: [0, 0, 0],
+          position: myPosition,
         }}
-        newPosition={[0, 0, 0]}
+        newPosition={myPosition}
       />
     </>
   );

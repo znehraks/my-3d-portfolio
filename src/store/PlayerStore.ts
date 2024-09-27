@@ -1,4 +1,4 @@
-import { IChat, INotice, IPlayer } from '@/types';
+import { IChat, INotice, IPlayer, IPosition } from '@/types';
 import { atom } from 'jotai';
 
 /**
@@ -10,6 +10,11 @@ export const SelectedCharacterGlbNameIndexAtom = atom<number>(0);
  * 캐릭터 선택이 완료되었는지 여부
  */
 export const CharacterSelectFinishedAtom = atom(false);
+
+/**
+ * socket 넣기 전까지 이동 정보 atom
+ */
+export const MyPositionAtom = atom<IPosition>([0, 0, 0]);
 
 /**
  * 현재 접속중인 플레이어들

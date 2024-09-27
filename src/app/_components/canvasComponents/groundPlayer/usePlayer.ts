@@ -28,6 +28,7 @@ export const useGroundPlayer = ({ player, newPosition, modelIndex }: IUseGroundP
   const point = document.getElementById(`player-point-${playerId}`);
 
   const playerRef = useRef<THREE.Group>(null);
+  const playerLightRef = useRef<THREE.Group>(null);
 
   const { scene, materials, animations } = useGLTF(
     (() => {
@@ -66,9 +67,9 @@ export const useGroundPlayer = ({ player, newPosition, modelIndex }: IUseGroundP
         z: 0,
       },
       {
-        x: 2,
-        y: 2,
-        z: 2,
+        x: 3,
+        y: 3,
+        z: 3,
       },
     );
   }, [nodes, playerId, scene]);
@@ -84,13 +85,15 @@ export const useGroundPlayer = ({ player, newPosition, modelIndex }: IUseGroundP
 
   // const tempVec3 = new THREE.Vector3();
 
-  useFrame(() => {
+  useFrame(({ camera }) => {
     if (!player) return;
     if (!playerRef.current) return;
     if (playerRef.current.position.distanceTo(vectoredNewPosition) > 0.1) {
-      const direction = playerRef.current.position.clone().sub(vectoredNewPosition).normalize().multiplyScalar(0.04);
+      const direction = playerRef.current.position.clone().sub(vectoredNewPosition).normalize().multiplyScalar(0.1);
       playerRef.current.position.sub(direction);
       playerRef.current.lookAt(vectoredNewPosition);
+
+      playerLightRef?.current?.position.copy(playerRef.current.position);
 
       if (point) {
         point.style.transform = `translate(
@@ -103,10 +106,15 @@ export const useGroundPlayer = ({ player, newPosition, modelIndex }: IUseGroundP
     } else {
       setAnimation('CharacterArmature|CharacterArmature|CharacterArmature|Idle');
     }
+    camera.position
+      .set(playerRef.current.position.x, playerRef.current.position.y + 10, playerRef.current.position.z)
+      .addScalar(60);
+    camera.lookAt(playerRef.current.position);
   });
   return {
     nicknameRef,
     playerRef,
+    playerLightRef,
     memoizedPosition,
     playerId,
     nodes,

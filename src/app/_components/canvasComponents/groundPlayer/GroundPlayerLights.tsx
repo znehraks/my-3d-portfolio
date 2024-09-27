@@ -1,10 +1,10 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useEffect, useMemo } from 'react';
-import { PointLight, Vector3 } from 'three';
+import React, { forwardRef, useEffect, useMemo } from 'react';
+import { Group, PointLight, Vector3 } from 'three';
 import gsap from 'gsap';
 import { IPosition } from '@/types';
 
-export function GroundPlayerLights({ memoizedPosition }: { memoizedPosition: Vector3 }) {
+export const GroundPlayerLights = forwardRef<Group, { memoizedPosition: Vector3 }>(({ memoizedPosition }, ref) => {
   const lightRefs = useMemo(
     () => [{ current: null }, { current: null }, { current: null }, { current: null }, { current: null }] as const,
     [],
@@ -14,7 +14,7 @@ export function GroundPlayerLights({ memoizedPosition }: { memoizedPosition: Vec
     lightRefs.forEach((ref) => {
       if (ref.current) {
         gsap.to(ref.current, {
-          intensity: 10,
+          intensity: 20,
           duration: 1,
           yoyo: true,
           repeat: -1,
@@ -36,17 +36,17 @@ export function GroundPlayerLights({ memoizedPosition }: { memoizedPosition: Vec
   );
 
   return (
-    <>
+    <group ref={ref}>
       {lightPositions.map((position, index) => (
         <pointLight
           key={index}
           ref={lightRefs[index] as React.RefObject<PointLight>}
           position={position}
-          intensity={5}
+          intensity={10}
           distance={10}
           color="#f0f0ff"
         />
       ))}
-    </>
+    </group>
   );
-}
+});
