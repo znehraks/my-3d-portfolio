@@ -2,7 +2,6 @@
 import { useEffect } from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 
-import _ from 'lodash-es';
 import {
   AlreadyDisplayedRecentChatsAtom,
   ChatsAtom,
@@ -14,6 +13,7 @@ import {
 } from '@/store/PlayerStore';
 import { socket } from '@/clientSocket';
 import { IChat, INotice, IPlayer } from '@/types';
+import { uniqBy } from 'lodash-es';
 
 export function ClientSocketControls() {
   const setPlayers = useSetAtom(PlayersAtom);
@@ -57,7 +57,7 @@ export function ClientSocketControls() {
     const handleNewText = ({ senderId, senderNickname, senderJobPosition, text, timestamp }: IChat) => {
       setChats((prev) => [...prev, { senderId, senderNickname, senderJobPosition, text, timestamp }]);
 
-      const uniqRecentChats = _.uniqBy(
+      const uniqRecentChats = uniqBy(
         [...chats, { senderId, senderNickname, senderJobPosition, text, timestamp }].reverse(),
         'senderId',
       );

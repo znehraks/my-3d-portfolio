@@ -22,9 +22,11 @@ export function useTypingEffect({
       }, speed);
 
       return () => clearTimeout(typingTimer);
-    } else if (!isTypingComplete) {
+    }
+    if (!isTypingComplete) {
       setIsTypingComplete(true);
     }
+    return () => {};
   }, [currentIndex, text, speed, isTypingComplete]);
 
   useEffect(() => {
@@ -45,6 +47,7 @@ export function useTypingEffect({
 
       return () => clearTimeout(displayTimer);
     }
+    return () => {};
   }, [isTypingComplete, displayTime]);
 
   return { opacity, displayedText };

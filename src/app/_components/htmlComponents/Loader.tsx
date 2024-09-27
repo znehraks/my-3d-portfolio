@@ -13,7 +13,7 @@ export function Loader() {
 
   return (
     <Html center>
-      <progress value={progress}></progress>
+      <progress value={progress} />
     </Html>
   );
 }

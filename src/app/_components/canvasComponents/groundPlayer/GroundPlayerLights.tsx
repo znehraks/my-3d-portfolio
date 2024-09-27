@@ -11,9 +11,9 @@ export const GroundPlayerLights = forwardRef<Group, { memoizedPosition: Vector3 
   );
 
   useEffect(() => {
-    lightRefs.forEach((ref) => {
-      if (ref.current) {
-        gsap.to(ref.current, {
+    lightRefs.forEach((lightRef) => {
+      if (lightRef.current) {
+        gsap.to(lightRef.current, {
           intensity: 20,
           duration: 1,
           yoyo: true,
