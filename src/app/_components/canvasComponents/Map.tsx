@@ -11,12 +11,12 @@ export function Map() {
     <>
       <OrbitControls
         ref={controls}
-        minDistance={5}
-        maxDistance={20}
-        maxPolarAngle={Math.PI / 2.5}
-        minPolarAngle={Math.PI / 4}
-        maxAzimuthAngle={Math.PI / 2}
-        minAzimuthAngle={0}
+        // minDistance={5}
+        // maxDistance={20}
+        // maxPolarAngle={Math.PI / 2.5}
+        // minPolarAngle={Math.PI / 4}
+        // maxAzimuthAngle={Math.PI / 2}
+        // minAzimuthAngle={0}
       />
       <GroundLights />
       <GroundObjects />
