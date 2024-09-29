@@ -8,9 +8,9 @@ export function useBounce<T extends { scale: Vector3 }>(ref: RefObject<T>) {
       gsap.to(ref.current.scale, {
         yoyo: true,
         repeat: -1,
-        x: 1.1,
-        y: 1.1,
-        z: 1.1,
+        x: 1.05,
+        y: 1.05,
+        z: 1.05,
         delay: Math.random(),
       });
   }, [ref]);
