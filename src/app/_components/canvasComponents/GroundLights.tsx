@@ -78,12 +78,12 @@ export function GroundLights() {
         position={position}
         color={color}
         shadow-normalBias={0.1}
-        shadow-camera-left={-25}
-        shadow-camera-right={25}
-        shadow-camera-top={25}
-        shadow-camera-bottom={-25}
+        shadow-camera-left={-100}
+        shadow-camera-right={100}
+        shadow-camera-top={100}
+        shadow-camera-bottom={-100}
         shadow-camera-near={0.1}
-        shadow-camera-far={200}
+        shadow-camera-far={1000}
       />
     </>
   );

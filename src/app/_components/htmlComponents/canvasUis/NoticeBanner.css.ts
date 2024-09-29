@@ -17,6 +17,12 @@ export const noticeBannerWrapperStyle = style({
   padding: '10px',
   color: 'white',
   zIndex: 1,
+  '@media': {
+    'screen and (max-width: 501px)': {
+      fontSize: '14px',
+      height: '50px',
+    },
+  },
 });
 
 export const noticeBannerWrapperVisibleStyle = style([
