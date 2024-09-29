@@ -86,11 +86,15 @@ export const useGroundPlayer = ({ player, newPosition, modelIndex }: IUseGroundP
 
   // const tempVec3 = new THREE.Vector3();
 
-  useFrame(({ camera }) => {
+  useFrame(({ camera }, delta) => {
     if (!player) return;
     if (!playerRef.current) return;
     if (playerRef.current.position.distanceTo(vectoredNewPosition) > 0.1) {
-      const direction = playerRef.current.position.clone().sub(vectoredNewPosition).normalize().multiplyScalar(0.1);
+      const direction = playerRef.current.position
+        .clone()
+        .sub(vectoredNewPosition)
+        .normalize()
+        .multiplyScalar(30 * delta);
       playerRef.current.position.sub(direction);
       playerRef.current.lookAt(vectoredNewPosition);
 
