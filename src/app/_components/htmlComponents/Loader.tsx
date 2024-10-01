@@ -1,4 +1,4 @@
-import { IsLoadCompletedAtom } from '@/store/PlayerStore';
+import { IsLoadCompletedAtom } from '@/store';
 import { Html, useProgress } from '@react-three/drei';
 import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';

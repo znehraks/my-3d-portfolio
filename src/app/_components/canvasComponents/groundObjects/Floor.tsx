@@ -1,5 +1,5 @@
 import { GROUND_MAP_SIZE } from '@/constants';
-import { MyPositionAtom } from '@/store/PlayerStore';
+import { MyPositionAtom } from '@/store';
 import { useLoader } from '@react-three/fiber';
 import { useSetAtom } from 'jotai';
 import { useEffect, useRef } from 'react';
@@ -24,8 +24,9 @@ export function Floor() {
       receiveShadow
       rotation-x={-Math.PI / 2}
       position-y={-0.001}
-      onPointerDown={() => {
+      onPointerDown={(e) => {
         isPointerPressed.current = true;
+        setMyPosition([e.point.x, 0, e.point.z]);
       }}
       onPointerMove={(e) => {
         if (isPointerPressed.current) {

@@ -1,5 +1,5 @@
 import { useAtomValue } from 'jotai';
-import { MyPositionAtom } from '@/store/PlayerStore';
+import { MyPositionAtom } from '@/store';
 import { useRef } from 'react';
 import { OrbitControls as OrbitControlsClass } from 'three-stdlib';
 import { OrbitControls } from '@react-three/drei';

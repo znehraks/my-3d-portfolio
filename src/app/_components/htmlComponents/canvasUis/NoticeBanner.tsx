@@ -3,7 +3,7 @@
 import { useAtomValue } from 'jotai';
 import { noticeBannerWrapperInvisibleStyle, noticeBannerWrapperVisibleStyle } from './NoticeBanner.css';
 import { useTypingEffect } from './useTypingEffect';
-import { IsLoadCompletedAtom } from '@/store/PlayerStore';
+import { IsLoadCompletedAtom } from '@/store';
 
 export function NoticeBanner() {
   const isLoadCompleted = useAtomValue(IsLoadCompletedAtom);

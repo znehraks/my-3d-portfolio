@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 import { STEPS } from '@/constants';
-import { CharacterSelectFinishedAtom, SelectedCharacterGlbNameIndexAtom } from '@/store/PlayerStore';
+import { CharacterSelectFinishedAtom, SelectedCharacterGlbNameIndexAtom } from '@/store';
 import { useAtom, useSetAtom } from 'jotai';
 import { useState } from 'react';
 import { socket } from '@/clientSocket';

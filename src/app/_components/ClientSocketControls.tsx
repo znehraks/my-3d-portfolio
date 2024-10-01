@@ -10,7 +10,7 @@ import {
   MeAtom,
   PlayersAtom,
   RecentChatsAtom,
-} from '@/store/PlayerStore';
+} from '@/store';
 import { socket } from '@/clientSocket';
 import { IChat, INotice, IPlayer } from '@/types';
 import { uniqBy } from 'lodash-es';

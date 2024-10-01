@@ -55,3 +55,11 @@ export const EnteredPlayerNoticeAtom = atom<INotice | null>(null);
  * 퇴장 공지 정보
  */
 export const ExitedPlayerNoticeAtom = atom<INotice | null>(null);
+
+export enum MODAL_KEY {
+  'WOODEN_SIGN' = 'WOODEN_SIGN',
+}
+/**
+ * 모달 노출 여부
+ */
+export const OpenModalKeyAtom = atom<MODAL_KEY | null>(null);
