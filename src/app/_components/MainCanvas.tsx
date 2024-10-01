@@ -16,7 +16,7 @@ export function MainCanvas() {
       shadows
       camera={{
         fov: 30,
-        near: 0.01,
+        near: 30,
         far: 100000,
         position: [CAMERA_DISTANCE, CAMERA_DISTANCE, CAMERA_DISTANCE],
       }}
