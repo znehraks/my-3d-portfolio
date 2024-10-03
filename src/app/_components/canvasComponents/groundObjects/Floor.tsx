@@ -1,5 +1,5 @@
 import { GROUND_MAP_SIZE } from '@/constants';
-import { MyPositionAtom } from '@/store';
+import { IsHelpTooltipVisibleAtom, MyPositionAtom } from '@/store';
 import { useLoader } from '@react-three/fiber';
 import { useSetAtom } from 'jotai';
 import { useEffect, useRef } from 'react';
@@ -7,6 +7,7 @@ import { RepeatWrapping, Texture, TextureLoader } from 'three';
 
 export function Floor() {
   const setMyPosition = useSetAtom(MyPositionAtom);
+  const setIsHelpTooltipVisible = useSetAtom(IsHelpTooltipVisibleAtom);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const sandTexture = useLoader(TextureLoader as any, '/texture/sand.webp') as Texture;
   const isPointerPressed = useRef(false);
@@ -25,6 +26,7 @@ export function Floor() {
       rotation-x={-Math.PI / 2}
       position-y={-0.001}
       onPointerDown={(e) => {
+        setIsHelpTooltipVisible(false);
         isPointerPressed.current = true;
         setMyPosition([e.point.x, 0, e.point.z]);
       }}

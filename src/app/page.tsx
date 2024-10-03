@@ -1,3 +1,4 @@
+import { HelpTooltip } from './_components/htmlComponents/canvasUis/HelpTooltip';
 import { NoticeBanner } from './_components/htmlComponents/canvasUis/NoticeBanner';
 import { WoodenSignModal } from './_components/htmlComponents/canvasUis/WoodenSignModal';
 import { MainCanvas } from './_components/MainCanvas';
@@ -7,6 +8,7 @@ export default function Home() {
     <>
       <NoticeBanner />
       <WoodenSignModal />
+      <HelpTooltip />
       <MainCanvas />
     </>
   );
