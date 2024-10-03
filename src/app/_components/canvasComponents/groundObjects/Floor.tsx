@@ -8,7 +8,7 @@ import { RepeatWrapping, Texture, TextureLoader } from 'three';
 export function Floor() {
   const setMyPosition = useSetAtom(MyPositionAtom);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const sandTexture = useLoader(TextureLoader as any, '/texture/sand.jpg') as Texture;
+  const sandTexture = useLoader(TextureLoader as any, '/texture/sand.webp') as Texture;
   const isPointerPressed = useRef(false);
 
   useEffect(() => {
