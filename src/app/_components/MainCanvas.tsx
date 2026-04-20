@@ -10,20 +10,23 @@ import { Loader } from './htmlComponents/Loader';
 
 export function MainCanvas() {
   return (
-    <Canvas
-      id="canvas"
-      gl={{ antialias: true }}
-      shadows
-      camera={{
-        fov: 30,
-        near: 30,
-        far: 100000,
-        position: [CAMERA_DISTANCE, CAMERA_DISTANCE, CAMERA_DISTANCE],
-      }}
-    >
-      <Suspense fallback={<Loader />}>
-        <Map />
-      </Suspense>
-    </Canvas>
+    <>
+      <Canvas
+        id="canvas"
+        gl={{ antialias: true }}
+        shadows
+        camera={{
+          fov: 30,
+          near: 30,
+          far: 100000,
+          position: [CAMERA_DISTANCE, CAMERA_DISTANCE, CAMERA_DISTANCE],
+        }}
+      >
+        <Suspense fallback={null}>
+          <Map />
+        </Suspense>
+      </Canvas>
+      <Loader />
+    </>
   );
 }

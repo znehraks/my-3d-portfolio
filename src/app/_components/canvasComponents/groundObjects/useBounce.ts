@@ -2,7 +2,7 @@ import gsap from 'gsap';
 import { RefObject, useEffect } from 'react';
 import { Vector3 } from 'three';
 
-export function useBounce<T extends { scale: Vector3 }>(ref: RefObject<T>) {
+export function useBounce<T extends { scale: Vector3 }>(ref: RefObject<T | null>) {
   useEffect(() => {
     if (ref.current)
       gsap.to(ref.current.scale, {

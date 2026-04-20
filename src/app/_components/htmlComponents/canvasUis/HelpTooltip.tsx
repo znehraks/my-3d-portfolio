@@ -1,16 +1,21 @@
 'use client';
 
+import clsx from 'clsx';
 import { IsHelpTooltipVisibleAtom } from '@/store';
 import { useAtomValue } from 'jotai';
-import { helpTooltipWrapperHiddenStyle, helpTooltipWrapperVisibleStyle } from './HelpTooltip.css';
 import { createPortal } from 'react-dom';
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { getBrowserDeviceInfo } from '../../getBrowserDeviceInfo';
 
 export function HelpTooltip() {
   const { device } = getBrowserDeviceInfo();
   const ref = useRef<HTMLDivElement>(null);
   const isHelpTooltipVisible = useAtomValue(IsHelpTooltipVisibleAtom);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const calculatePosition = useCallback(
     (e: PointerEvent) => {
@@ -37,10 +42,17 @@ export function HelpTooltip() {
     return '#eeeeee';
   }, []);
 
+  if (!mounted || typeof document === 'undefined') {
+    return null;
+  }
+
   return createPortal(
     <div
       ref={ref}
-      className={isHelpTooltipVisible ? helpTooltipWrapperVisibleStyle : helpTooltipWrapperHiddenStyle}
+      className={clsx(
+        'fixed left-0 top-0 z-[100] text-[18px]',
+        isHelpTooltipVisible ? 'block animate-tooltip-blink' : 'hidden',
+      )}
       style={{
         color: fontColor,
       }}

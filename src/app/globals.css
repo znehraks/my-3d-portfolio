@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 /* Reset CSS */
 
 /* Box sizing rules */
@@ -73,5 +75,25 @@ select {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+@keyframes tooltip-blink {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@layer utilities {
+  .animate-tooltip-blink {
+    animation: tooltip-blink 1.5s ease-in-out infinite;
   }
 }

@@ -6,7 +6,7 @@ import { IPosition } from '@/types';
 
 export const GroundPlayerLights = forwardRef<Group, { memoizedPosition: Vector3 }>(({ memoizedPosition }, ref) => {
   const lightRefs = useMemo(
-    () => [{ current: null }, { current: null }, { current: null }, { current: null }, { current: null }] as const,
+    () => Array.from({ length: 5 }, () => React.createRef<PointLight>()),
     [],
   );
 
@@ -40,7 +40,7 @@ export const GroundPlayerLights = forwardRef<Group, { memoizedPosition: Vector3 
       {lightPositions.map((position, index) => (
         <pointLight
           key={index}
-          ref={lightRefs[index] as React.RefObject<PointLight>}
+          ref={lightRefs[index]}
           position={position}
           intensity={10}
           distance={10}

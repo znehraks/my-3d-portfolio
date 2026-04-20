@@ -1,19 +1,5 @@
-import { IsLoadCompletedAtom } from '@/store';
-import { Html, useProgress } from '@react-three/drei';
-import { useSetAtom } from 'jotai';
-import { useEffect } from 'react';
+import { Loader as DreiLoader } from '@react-three/drei';
 
 export function Loader() {
-  const { progress } = useProgress();
-  const setIsLoadCompleted = useSetAtom(IsLoadCompletedAtom);
-
-  useEffect(() => {
-    setIsLoadCompleted(progress === 100);
-  }, [progress, setIsLoadCompleted]);
-
-  return (
-    <Html center>
-      <progress value={progress} />
-    </Html>
-  );
+  return <DreiLoader />;
 }

@@ -1,6 +1,6 @@
-import { useAtomValue } from 'jotai';
-import { MyPositionAtom } from '@/store';
-import { useRef } from 'react';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { IsLoadCompletedAtom, MyPositionAtom } from '@/store';
+import { useEffect, useRef } from 'react';
 import { OrbitControls as OrbitControlsClass } from 'three-stdlib';
 import { OrbitControls } from '@react-three/drei';
 import { GroundObjects } from './groundObjects/GroundObjects';
@@ -12,7 +12,16 @@ import { CAMERA_DISTANCE } from '@/constants';
 export function Map() {
   const controls = useRef<OrbitControlsClass>(null);
   const myPosition = useAtomValue(MyPositionAtom);
+  const setIsLoadCompleted = useSetAtom(IsLoadCompletedAtom);
   useAspectRatio();
+
+  useEffect(() => {
+    setIsLoadCompleted(true);
+
+    return () => {
+      setIsLoadCompleted(false);
+    };
+  }, [setIsLoadCompleted]);
 
   return (
     <>

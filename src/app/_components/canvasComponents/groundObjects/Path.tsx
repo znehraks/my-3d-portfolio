@@ -29,8 +29,8 @@ export function Paths() {
 
   return (
     <Instances geometry={mesh.geometry} material={mesh.material}>
-      {positions.map((position) => (
-        <Instance key={`${position[0]}-${position[1]}-${position[2]}`} position={position} scale={4} />
+      {positions.map((position, index) => (
+        <Instance key={`path-${index}-${position[0]}-${position[1]}-${position[2]}`} position={position} scale={4} />
       ))}
     </Instances>
   );

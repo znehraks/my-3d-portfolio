@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { layoutWrapperStyle } from './layout.css';
 import { Footer } from './_components/htmlComponents/Footer';
 
 export const metadata: Metadata = {
@@ -16,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <div className={layoutWrapperStyle}>{children}</div>
+        <div className="h-dvh w-dvw bg-[aliceblue]">{children}</div>
         <Footer />
       </body>
     </html>

@@ -1,22 +1,21 @@
 /* eslint-disable jsx-a11y/no-autofocus */
+import clsx from 'clsx';
 import { STEPS } from '@/constants';
 import { CharacterSelectFinishedAtom, SelectedCharacterGlbNameIndexAtom } from '@/store';
 import { useAtom, useSetAtom } from 'jotai';
 import { useState } from 'react';
 import { socket } from '@/clientSocket';
 import { isValidText } from '@/utils';
-import {
-  characterCanvasContainer,
-  characterCanvasWrapper,
-  characterTuningWrapper,
-  inputStyle,
-  loginContainerStyle,
-  loginTitle,
-  nextBtnDisabledStyle,
-  nextBtnValidStyle,
-  prevBtnStyle,
-} from './Lobby.css';
 import { MainCanvas } from '../MainCanvas';
+
+const loginTitleClassName = 'text-[22px] font-bold';
+const inputClassName = 'w-[280px] rounded-lg border-none px-2.5 py-3 text-[18px] outline-none';
+const nextButtonBaseClassName =
+  'w-[280px] rounded-lg border-none px-2.5 py-2.5 text-[14px] font-semibold outline-none transition-colors duration-200';
+const nextButtonValidClassName = `${nextButtonBaseClassName} cursor-pointer bg-[#6731a1] text-white hover:bg-[#340070]`;
+const nextButtonDisabledClassName = `${nextButtonBaseClassName} cursor-not-allowed bg-[#8aceff] text-[#ededed]`;
+const previousButtonClassName =
+  'w-[280px] cursor-pointer rounded-lg border-none px-2.5 py-2.5 text-[14px] font-semibold text-[#666666] outline-none';
 
 export function Lobby() {
   const [currentStep, setCurrentStep] = useState<STEPS>(STEPS.NICK_NAME);
@@ -28,12 +27,12 @@ export function Lobby() {
 
   if (!socket) return null;
   return (
-    <div className={loginContainerStyle}>
+    <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-[#85e6ff]">
       {currentStep === STEPS.NICK_NAME && (
         <>
-          <div className={loginTitle}>패디에서 사용할 내 이름이에요.</div>
+          <div className={loginTitleClassName}>패디에서 사용할 내 이름이에요.</div>
           <input
-            className={inputStyle}
+            className={inputClassName}
             // eslint-disable-next-line jsx-a11y/no-autofocus
             autoFocus
             placeholder="별명을 입력해주세요."
@@ -50,7 +49,7 @@ export function Lobby() {
           <button
             type="button"
             disabled={!isValidText(tempNickname)}
-            className={isValidText(tempNickname) ? nextBtnValidStyle : nextBtnDisabledStyle}
+            className={clsx(isValidText(tempNickname) ? nextButtonValidClassName : nextButtonDisabledClassName)}
             onClick={() => {
               setCurrentStep((prev) => prev + 1);
             }}
@@ -61,9 +60,9 @@ export function Lobby() {
       )}
       {currentStep === STEPS.JOB_POSITION && (
         <>
-          <div className={loginTitle}>패디에서 공유할 내 직군이에요.</div>
+          <div className={loginTitleClassName}>패디에서 공유할 내 직군이에요.</div>
           <input
-            className={inputStyle}
+            className={inputClassName}
             autoFocus
             placeholder="개발 직군을 입력해주세요."
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,7 +78,7 @@ export function Lobby() {
           <button
             type="button"
             disabled={!isValidText(tempJobPosition)}
-            className={isValidText(tempJobPosition) ? nextBtnValidStyle : nextBtnDisabledStyle}
+            className={clsx(isValidText(tempJobPosition) ? nextButtonValidClassName : nextButtonDisabledClassName)}
             onClick={() => {
               setCurrentStep((prev) => prev + 1);
             }}
@@ -88,7 +87,7 @@ export function Lobby() {
           </button>
           <button
             type="button"
-            className={prevBtnStyle}
+            className={previousButtonClassName}
             onClick={() => {
               setCurrentStep((prev) => prev - 1);
             }}
@@ -99,17 +98,17 @@ export function Lobby() {
       )}
       {currentStep === STEPS.CHARACTER && (
         <>
-          <div className={loginTitle}>패디에서 사용할 내 아바타를 고를 시간이에요.</div>
-          <div className={characterCanvasContainer}>
-            <div className={characterTuningWrapper}>
-              <div className={characterCanvasWrapper}>
+          <div className={loginTitleClassName}>패디에서 사용할 내 아바타를 고를 시간이에요.</div>
+          <div className="flex h-[80%] w-[1200px] flex-col items-center justify-center gap-3">
+            <div className="flex h-[80%] w-full flex-row items-center justify-start">
+              <div className="flex h-full flex-[2] flex-row items-center justify-between">
                 <MainCanvas />
               </div>
             </div>
 
             <button
               type="button"
-              className={!tempNickname || !tempJobPosition ? nextBtnDisabledStyle : nextBtnValidStyle}
+              className={clsx(!tempNickname || !tempJobPosition ? nextButtonDisabledClassName : nextButtonValidClassName)}
               onClick={() => {
                 if (!tempNickname || !tempJobPosition) return;
                 socket.emit('initialize', {
@@ -139,7 +138,7 @@ export function Lobby() {
 
             <button
               type="button"
-              className={prevBtnStyle}
+              className={previousButtonClassName}
               onClick={() => {
                 setSelectedCharacterGlbNameIndex((prev) => {
                   if (prev === undefined) return 1;
@@ -152,7 +151,7 @@ export function Lobby() {
             </button>
             <button
               type="button"
-              className={prevBtnStyle}
+              className={previousButtonClassName}
               onClick={() => {
                 setCurrentStep((prev) => prev - 1);
               }}
