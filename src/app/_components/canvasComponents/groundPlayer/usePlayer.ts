@@ -74,15 +74,16 @@ export const useGroundPlayer = ({ player, newPosition, modelIndex }: IUseGroundP
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const nodes = objectMap.nodes as any;
 
-  const idleAnim = isMeshy ? 'Idle' : LEGACY_IDLE;
-  const walkAnim = isMeshy ? 'Walking' : null;
-  const runAnim = isMeshy ? 'Running' : LEGACY_RUN;
+  const idleAnim = isMeshy ? 'Running' : LEGACY_IDLE;
+  const walkAnim = isMeshy ? 'Idle' : null;
+  const runAnim = isMeshy ? 'Walking' : LEGACY_RUN;
 
   const [animation, setAnimation] = useState(idleAnim);
   const { actions } = useAnimations(animations, playerRef);
 
   useEffect(() => {
     if (!playerRef.current) return;
+    const targetScale = isMeshy ? 6 : 3;
     gsap.fromTo(
       playerRef.current.scale,
       {
@@ -92,12 +93,12 @@ export const useGroundPlayer = ({ player, newPosition, modelIndex }: IUseGroundP
         z: 0,
       },
       {
-        x: 3,
-        y: 3,
-        z: 3,
+        x: targetScale,
+        y: targetScale,
+        z: targetScale,
       },
     );
-  }, [nodes, playerId, scene]);
+  }, [nodes, playerId, scene, isMeshy]);
 
   useEffect(() => {
     actions[animation]?.reset().fadeIn(0.5).play();
