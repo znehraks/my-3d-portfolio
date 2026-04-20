@@ -7,4 +7,4 @@ export enum STEPS {
   FINISH,
 }
 
-export const characterGlbNameCandidates = ['CubeGuyCharacter', 'CubeWomanCharacter', 'Steve'];
+export const characterGlbNameCandidates = ['CubeGuyCharacter', 'CubeWomanCharacter', 'Steve', 'meshy_jm'];

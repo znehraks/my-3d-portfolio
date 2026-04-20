@@ -38,7 +38,7 @@ export function Map() {
         player={{
           id: 'test-id',
           nickname: 'test-nickname',
-          selectedCharacterGlbNameIndex: 0,
+          selectedCharacterGlbNameIndex: 3,
           jobPosition: 'test-jobPosition',
           position: myPosition,
         }}

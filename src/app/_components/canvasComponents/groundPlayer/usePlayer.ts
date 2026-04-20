@@ -13,9 +13,16 @@ interface IUseGroundPlayer {
   newPosition: IPosition;
   modelIndex: number;
 }
+
+const MESHY_INDEX = 3;
+
+const LEGACY_IDLE = 'CharacterArmature|CharacterArmature|CharacterArmature|Idle';
+const LEGACY_RUN = 'CharacterArmature|CharacterArmature|CharacterArmature|Run';
+
 export const useGroundPlayer = ({ player, newPosition, modelIndex }: IUseGroundPlayer) => {
   const playerId = player?.id;
   const nicknameRef = useRef<THREE.Group>(null);
+  const isMeshy = modelIndex === MESHY_INDEX;
 
   const vectoredNewPosition = useMemo(
     () => new THREE.Vector3(newPosition[0], newPosition[1], newPosition[2]),
@@ -40,6 +47,8 @@ export const useGroundPlayer = ({ player, newPosition, modelIndex }: IUseGroundP
           return `/models/CubeWomanCharacter.glb`;
         case 2:
           return `/models/Steve.glb`;
+        case MESHY_INDEX:
+          return `/models/meshy_jm.glb`;
         default:
           return '';
       }
@@ -48,13 +57,28 @@ export const useGroundPlayer = ({ player, newPosition, modelIndex }: IUseGroundP
     materials: { [key: string]: THREE.MeshStandardMaterial };
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const clone = useMemo(() => SkeletonUtils.clone(scene), []);
+  const clone = useMemo(() => {
+    const c = SkeletonUtils.clone(scene);
+    if (isMeshy) {
+      c.traverse((o) => {
+        if ((o as THREE.Mesh).isMesh) {
+          (o as THREE.Mesh).castShadow = true;
+          (o as THREE.Mesh).receiveShadow = true;
+        }
+      });
+    }
+    return c;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const objectMap = useGraph(clone);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const nodes = objectMap.nodes as any;
 
-  const [animation, setAnimation] = useState('CharacterArmature|CharacterArmature|CharacterArmature|Idle');
+  const idleAnim = isMeshy ? 'Idle' : LEGACY_IDLE;
+  const walkAnim = isMeshy ? 'Walking' : null;
+  const runAnim = isMeshy ? 'Running' : LEGACY_RUN;
+
+  const [animation, setAnimation] = useState(idleAnim);
   const { actions } = useAnimations(animations, playerRef);
 
   useEffect(() => {
@@ -85,7 +109,8 @@ export const useGroundPlayer = ({ player, newPosition, modelIndex }: IUseGroundP
   useFrame(({ camera }, delta) => {
     if (!player) return;
     if (!playerRef.current) return;
-    if (playerRef.current.position.distanceTo(vectoredNewPosition) > 1) {
+    const distance = playerRef.current.position.distanceTo(vectoredNewPosition);
+    if (distance > 1) {
       const direction = playerRef.current.position
         .clone()
         .sub(vectoredNewPosition)
@@ -103,9 +128,13 @@ export const useGroundPlayer = ({ player, newPosition, modelIndex }: IUseGroundP
           )`;
       }
 
-      setAnimation('CharacterArmature|CharacterArmature|CharacterArmature|Run');
+      if (walkAnim && distance < 4) {
+        setAnimation(walkAnim);
+      } else {
+        setAnimation(runAnim);
+      }
     } else {
-      setAnimation('CharacterArmature|CharacterArmature|CharacterArmature|Idle');
+      setAnimation(idleAnim);
     }
     camera.position
       .set(playerRef.current.position.x, playerRef.current.position.y + 10, playerRef.current.position.z)
@@ -120,5 +149,7 @@ export const useGroundPlayer = ({ player, newPosition, modelIndex }: IUseGroundP
     playerId,
     nodes,
     materials,
+    clone,
+    isMeshy,
   };
 };
