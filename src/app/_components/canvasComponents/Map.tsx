@@ -28,7 +28,7 @@ export function Map() {
       <OrbitControls
         ref={controls}
         minDistance={5}
-        maxDistance={Math.sqrt(CAMERA_DISTANCE ** 2 + CAMERA_DISTANCE ** 2 + CAMERA_DISTANCE ** 2)}
+        maxDistance={CAMERA_DISTANCE * 4}
         maxPolarAngle={Math.PI / 2.75}
         minPolarAngle={Math.PI / 4}
       />

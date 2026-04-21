@@ -35,3 +35,13 @@
 
 - 실시간 backend server는 기존에 존재하는 socket.io 활용
 - 비실시간 코드는 firebase로 간단히 구성
+
+### Docs
+
+이력서 통합 작업의 제품/구현/에셋 문서는 `docs/` 아래에서 관리한다.
+
+- 제품 요구사항: [`docs/PRD.md`](./docs/PRD.md)
+- Phase A 실행 체크리스트: [`docs/IMPLEMENTATION_PLAN.md`](./docs/IMPLEMENTATION_PLAN.md)
+- Meshy 3D 에셋 카탈로그(정본): [`docs/meshy-assets.md`](./docs/meshy-assets.md)
+
+코드에서 Meshy로 교체할 3D 에셋은 로딩 지점 바로 위에 `🧩 Meshy asset — swap-ready. Prompt/spec: docs/meshy-assets.md#<anchor>` 주석을 단다.

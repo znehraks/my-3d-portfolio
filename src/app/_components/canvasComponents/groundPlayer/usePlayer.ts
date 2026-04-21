@@ -3,10 +3,13 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useGLTF, useAnimations } from '@react-three/drei';
 import { useFrame, useGraph } from '@react-three/fiber';
 import { GLTF, SkeletonUtils } from 'three-stdlib';
-import { IPlayer, IPosition } from '@/types';
+import { useSetAtom } from 'jotai';
 import gsap from 'gsap';
+import { IPlayer, IPosition } from '@/types';
 import { calculateMinimapPosition } from '@/utils';
 import { CAMERA_DISTANCE } from '@/constants';
+import { CurrentZoneAtom, ZoneId } from '@/store';
+import { detectZone } from '../zones/zoneBounds';
 
 interface IUseGroundPlayer {
   player?: IPlayer;
@@ -37,6 +40,8 @@ export const useGroundPlayer = ({ player, newPosition, modelIndex }: IUseGroundP
 
   const playerRef = useRef<THREE.Group>(null);
   const playerLightRef = useRef<THREE.Group>(null);
+  const currentZoneRef = useRef<ZoneId | null>(null);
+  const setCurrentZone = useSetAtom(CurrentZoneAtom);
 
   const { scene, materials, animations } = useGLTF(
     (() => {
@@ -141,6 +146,13 @@ export const useGroundPlayer = ({ player, newPosition, modelIndex }: IUseGroundP
       .set(playerRef.current.position.x, playerRef.current.position.y + 10, playerRef.current.position.z)
       .addScalar(CAMERA_DISTANCE);
     camera.lookAt(playerRef.current.position);
+
+    // 존 감지: 플레이어가 AABB 경계를 넘을 때만 atom 업데이트 → 리렌더 최소화.
+    const nextZone = detectZone(playerRef.current.position.x, playerRef.current.position.z);
+    if (nextZone !== currentZoneRef.current) {
+      currentZoneRef.current = nextZone;
+      setCurrentZone(nextZone);
+    }
   });
   return {
     nicknameRef,

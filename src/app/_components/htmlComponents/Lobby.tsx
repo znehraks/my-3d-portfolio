@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-autofocus */
 import clsx from 'clsx';
 import { STEPS } from '@/constants';
 import { CharacterSelectFinishedAtom, SelectedCharacterGlbNameIndexAtom } from '@/store';
@@ -33,7 +32,6 @@ export function Lobby() {
           <div className={loginTitleClassName}>패디에서 사용할 내 이름이에요.</div>
           <input
             className={inputClassName}
-            // eslint-disable-next-line jsx-a11y/no-autofocus
             autoFocus
             placeholder="별명을 입력해주세요."
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {

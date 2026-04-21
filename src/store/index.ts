@@ -68,7 +68,31 @@ export const ExitedPlayerNoticeAtom = atom<INotice | null>(null);
 ExitedPlayerNoticeAtom.debugLabel = 'ExitedPlayerNoticeAtom';
 
 export enum MODAL_KEY {
-  'WOODEN_SIGN' = 'WOODEN_SIGN',
+  /** 놀이터 인트로 간판 — 자기소개 + 개발 철학 */
+  INTRO_ABOUT = 'INTRO_ABOUT',
+  /** 놀이터 인트로 간판 — 연락처/링크 */
+  CONTACTS = 'CONTACTS',
+  /** 경력 거리 — 각 회사 */
+  CAREER_MIRIDIH = 'CAREER_MIRIDIH',
+  CAREER_AIV = 'CAREER_AIV',
+  CAREER_FASTCAMPUS = 'CAREER_FASTCAMPUS',
+  CAREER_MUHAYU = 'CAREER_MUHAYU',
+  CAREER_ARCHIDRAW = 'CAREER_ARCHIDRAW',
+  CAREER_LAB724 = 'CAREER_LAB724',
+  /** AI 스튜디오 — 각 AI 프로젝트 */
+  AI_88IGHT = 'AI_88IGHT',
+  AI_NEWSBOT = 'AI_NEWSBOT',
+  AI_RAG_BOT = 'AI_RAG_BOT',
+  AI_AGENT_TEAM = 'AI_AGENT_TEAM',
+  AI_CODE_MEMORY = 'AI_CODE_MEMORY',
+  AI_MEME_PUSH = 'AI_MEME_PUSH',
+  /** 명예의 전당 — 수상 */
+  AWARD_KOPIS = 'AWARD_KOPIS',
+  AWARD_INCHEON = 'AWARD_INCHEON',
+  AWARD_MYONGJI = 'AWARD_MYONGJI',
+  /** 명예의 전당 — 자격증/학력 */
+  CERTIFICATIONS = 'CERTIFICATIONS',
+  EDUCATION = 'EDUCATION',
 }
 /**
  * 모달 노출 여부
@@ -81,3 +105,11 @@ OpenModalKeyAtom.debugLabel = 'OpenModalKeyAtom';
  */
 export const IsHelpTooltipVisibleAtom = atom(true);
 IsHelpTooltipVisibleAtom.debugLabel = 'IsHelpTooltipVisibleAtom';
+
+export type ZoneId = 'intro' | 'skill-tower' | 'career-street' | 'ai-studio' | 'hall-of-fame';
+
+/**
+ * 플레이어가 현재 속한 존. 존 밖(사이 공간)이면 null.
+ */
+export const CurrentZoneAtom = atom<ZoneId | null>(null);
+CurrentZoneAtom.debugLabel = 'CurrentZoneAtom';

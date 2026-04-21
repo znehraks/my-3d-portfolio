@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import React, { useMemo } from 'react';
 import { useGLTF, Instances, Instance } from '@react-three/drei';
 import { Mesh } from 'three';

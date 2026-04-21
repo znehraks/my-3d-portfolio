@@ -1,4 +1,3 @@
-/* eslint-disable react/no-array-index-key */
 import React, { forwardRef, useEffect, useMemo } from 'react';
 import { Group, PointLight, Vector3 } from 'three';
 import gsap from 'gsap';

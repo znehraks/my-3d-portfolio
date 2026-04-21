@@ -35,6 +35,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .omx/
+.omc/
 .codex/*
 !.codex/agents/
 !.codex/agents/**
