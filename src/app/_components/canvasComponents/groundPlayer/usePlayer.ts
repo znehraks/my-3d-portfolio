@@ -10,6 +10,7 @@ import { calculateMinimapPosition } from '@/utils';
 import { CAMERA_DISTANCE } from '@/constants';
 import { CurrentZoneAtom, ZoneId } from '@/store';
 import { detectZone } from '../zones/zoneBounds';
+import { isInsideWalkableArea } from '@/walkableBoundary';
 
 interface IUseGroundPlayer {
   player?: IPlayer;
@@ -42,6 +43,7 @@ export const useGroundPlayer = ({ player, newPosition, modelIndex }: IUseGroundP
   const playerLightRef = useRef<THREE.Group>(null);
   const currentZoneRef = useRef<ZoneId | null>(null);
   const setCurrentZone = useSetAtom(CurrentZoneAtom);
+  const blockedTargetRef = useRef<THREE.Vector3 | null>(null);
 
   const { scene, materials, animations } = useGLTF(
     (() => {
@@ -115,33 +117,60 @@ export const useGroundPlayer = ({ player, newPosition, modelIndex }: IUseGroundP
   useFrame(({ camera }, delta) => {
     if (!player) return;
     if (!playerRef.current) return;
+
+    // 새 타겟이 들어오면 경계 락 해제 (클릭마다 다시 시도)
+    if (
+      blockedTargetRef.current &&
+      !blockedTargetRef.current.equals(vectoredNewPosition)
+    ) {
+      blockedTargetRef.current = null;
+    }
+    const isBlocked =
+      blockedTargetRef.current?.equals(vectoredNewPosition) ?? false;
+
     const distance = playerRef.current.position.distanceTo(vectoredNewPosition);
-    if (distance > 1) {
+    if (distance > 1 && !isBlocked) {
       const direction = playerRef.current.position
         .clone()
         .sub(vectoredNewPosition)
         .normalize()
         .multiplyScalar(30 * delta);
+
+      const prev = playerRef.current.position.clone();
       playerRef.current.position.sub(direction);
-      playerRef.current.lookAt(vectoredNewPosition);
 
-      playerLightRef?.current?.position.copy(playerRef.current.position);
-
-      if (point) {
-        point.style.transform = `translate(
-          ${calculateMinimapPosition(playerRef.current.position).x}px,
-          ${calculateMinimapPosition(playerRef.current.position).y}px
-          )`;
-      }
-
-      if (walkAnim && distance < 4) {
-        setAnimation(walkAnim);
+      if (
+        !isInsideWalkableArea(
+          playerRef.current.position.x,
+          playerRef.current.position.z,
+        )
+      ) {
+        // 경계 이탈: 위치 롤백 + 이 타겟 포기 (다음 클릭까지 재시도 안 함)
+        playerRef.current.position.copy(prev);
+        blockedTargetRef.current = vectoredNewPosition.clone();
+        setAnimation(idleAnim);
       } else {
-        setAnimation(runAnim);
+        playerRef.current.lookAt(vectoredNewPosition);
+        playerLightRef?.current?.position.copy(playerRef.current.position);
+
+        if (point) {
+          point.style.transform = `translate(
+            ${calculateMinimapPosition(playerRef.current.position).x}px,
+            ${calculateMinimapPosition(playerRef.current.position).y}px
+            )`;
+        }
+
+        if (walkAnim && distance < 4) {
+          setAnimation(walkAnim);
+        } else {
+          setAnimation(runAnim);
+        }
       }
     } else {
       setAnimation(idleAnim);
     }
+
+    // 카메라는 이동/정지/차단 여부와 무관하게 매 프레임 플레이어 추적 (jitter 방지)
     camera.position
       .set(playerRef.current.position.x, playerRef.current.position.y + 10, playerRef.current.position.z)
       .addScalar(CAMERA_DISTANCE);

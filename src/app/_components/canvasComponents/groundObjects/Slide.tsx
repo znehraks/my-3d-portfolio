@@ -6,7 +6,7 @@ import { useShadow } from './useShadow';
 const name = 'ground-slide';
 export function Slide() {
   const { scene } = useGLTF('/models/Slide.glb');
-  const position = useMemo(() => new Vector3(18, 0, -40), []);
+  const position = useMemo(() => new Vector3(60, 0, -50), []);
 
   useShadow({ scene });
 

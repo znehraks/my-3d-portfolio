@@ -30,7 +30,7 @@ export function Map() {
         minDistance={5}
         maxDistance={CAMERA_DISTANCE * 4}
         maxPolarAngle={Math.PI / 2.75}
-        minPolarAngle={Math.PI / 4}
+        minPolarAngle={Math.PI / 4.5}
       />
       <GroundLights />
       <GroundObjects />

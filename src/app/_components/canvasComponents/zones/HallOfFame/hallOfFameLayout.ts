@@ -30,7 +30,7 @@ export interface IHallOfFameStop {
   boxSize: [number, number, number];
 }
 
-export const HALL_OF_FAME_POSITION = { x: 0, z: -110 } as const;
+export const HALL_OF_FAME_POSITION = { x: 0, z: 95 } as const;
 
 export const HALL_OF_FAME_STOPS: IHallOfFameStop[] = [
   {
@@ -38,9 +38,9 @@ export const HALL_OF_FAME_STOPS: IHallOfFameStop[] = [
     label: '명지 창의융합 1위',
     modalKey: MODAL_KEY.AWARD_MYONGJI,
     propAnchor: 'trophy-gold',
-    position: [0, 2, -110],
-    signPosition: [0, 0, -105],
-    signRotationY: 0,
+    position: [0, 2, 95],
+    signPosition: [0, 0, 90],
+    signRotationY: Math.PI,
     placeholderColor: '#f5c542',
     boxSize: [1.6, 2.8, 1.6],
   },
@@ -49,9 +49,9 @@ export const HALL_OF_FAME_STOPS: IHallOfFameStop[] = [
     label: '인천 공공데이터 2위',
     modalKey: MODAL_KEY.AWARD_INCHEON,
     propAnchor: 'trophy-silver',
-    position: [-6, 1.8, -110],
-    signPosition: [-6, 0, -105],
-    signRotationY: 0,
+    position: [-6, 1.8, 95],
+    signPosition: [-6, 0, 90],
+    signRotationY: Math.PI,
     placeholderColor: '#c9d1da',
     boxSize: [1.4, 2.4, 1.4],
   },
@@ -60,9 +60,9 @@ export const HALL_OF_FAME_STOPS: IHallOfFameStop[] = [
     label: 'KOPIS 빅데이터 2위',
     modalKey: MODAL_KEY.AWARD_KOPIS,
     propAnchor: 'trophy-silver',
-    position: [6, 1.8, -110],
-    signPosition: [6, 0, -105],
-    signRotationY: 0,
+    position: [6, 1.8, 95],
+    signPosition: [6, 0, 90],
+    signRotationY: Math.PI,
     placeholderColor: '#c9d1da',
     boxSize: [1.4, 2.4, 1.4],
   },
@@ -71,8 +71,8 @@ export const HALL_OF_FAME_STOPS: IHallOfFameStop[] = [
     label: '자격증 액자',
     modalKey: MODAL_KEY.CERTIFICATIONS,
     propAnchor: 'certificate-frame',
-    position: [12, 1.6, -116],
-    signPosition: [8, 0, -116],
+    position: [12, 1.6, 101],
+    signPosition: [8, 0, 101],
     signRotationY: Math.PI / 2,
     placeholderColor: '#f5e0b3',
     boxSize: [2, 3, 0.3],
@@ -82,8 +82,8 @@ export const HALL_OF_FAME_STOPS: IHallOfFameStop[] = [
     label: '학력',
     modalKey: MODAL_KEY.EDUCATION,
     propAnchor: 'graduation-cap',
-    position: [-12, 1.2, -116],
-    signPosition: [-8, 0, -116],
+    position: [-12, 1.2, 101],
+    signPosition: [-8, 0, 101],
     signRotationY: -Math.PI / 2,
     placeholderColor: '#2f3e74',
     boxSize: [2, 1.2, 2],

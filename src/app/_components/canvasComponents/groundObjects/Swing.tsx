@@ -7,7 +7,7 @@ const name = 'ground-swing';
 const scale = 0.1;
 export function Swing() {
   const { scene } = useGLTF('/models/Swing.glb');
-  const position = useMemo(() => new Vector3(30, 0, -10), []);
+  const position = useMemo(() => new Vector3(30, 0, -60), []);
 
   useShadow({ scene });
 

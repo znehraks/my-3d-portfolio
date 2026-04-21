@@ -7,7 +7,7 @@ const name = 'ground-jungleGym';
 const scale = 2;
 export function JungleGym() {
   const { scene } = useGLTF('/models/Jungle gym.glb');
-  const position = useMemo(() => new Vector3(-45, 0, 12), []);
+  const position = useMemo(() => new Vector3(40, 0, -30), []);
 
   useShadow({ scene });
 

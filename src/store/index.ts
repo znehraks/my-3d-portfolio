@@ -106,7 +106,14 @@ OpenModalKeyAtom.debugLabel = 'OpenModalKeyAtom';
 export const IsHelpTooltipVisibleAtom = atom(true);
 IsHelpTooltipVisibleAtom.debugLabel = 'IsHelpTooltipVisibleAtom';
 
-export type ZoneId = 'intro' | 'skill-tower' | 'career-street' | 'ai-studio' | 'hall-of-fame';
+export type ZoneId =
+  | 'intro'
+  | 'skill-tower'
+  | 'career-street'
+  | 'hall-of-fame'
+  | 'tech-city'
+  | 'content-city'
+  | 'playground';
 
 /**
  * 플레이어가 현재 속한 존. 존 밖(사이 공간)이면 null.

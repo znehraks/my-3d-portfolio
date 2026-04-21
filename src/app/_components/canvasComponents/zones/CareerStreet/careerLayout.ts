@@ -35,20 +35,20 @@ export interface ICareerStop {
   meshyAnchor: CareerBuildingAnchor;
 }
 
-const SIDE_OFFSET = 14;
-const SIGN_OFFSET = 6;
+const SIDE_OFFSET = 8;
+const SIGN_OFFSET = 4;
 
-export const CAREER_STREET_START_Z = 80;
-export const CAREER_STREET_END_Z = 180;
+export const CAREER_STREET_START_Z = 32;
+export const CAREER_STREET_END_Z = 80;
 
 export const CAREER_STOPS: ICareerStop[] = [
   {
     id: 'miridih',
     company: '미리디',
     modalKey: MODAL_KEY.CAREER_MIRIDIH,
-    position: [SIDE_OFFSET, 0, 90],
+    position: [SIDE_OFFSET, 0, 36],
     signRotationY: -Math.PI / 2,
-    signPosition: [SIDE_OFFSET - SIGN_OFFSET, 0, 90],
+    signPosition: [SIDE_OFFSET - SIGN_OFFSET, 0, 36],
     placeholderColor: '#f3b6d8',
     meshyAnchor: 'building-miridih',
   },
@@ -56,9 +56,9 @@ export const CAREER_STOPS: ICareerStop[] = [
     id: 'aiv',
     company: '(주)아이브',
     modalKey: MODAL_KEY.CAREER_AIV,
-    position: [-SIDE_OFFSET, 0, 105],
+    position: [-SIDE_OFFSET, 0, 44],
     signRotationY: Math.PI / 2,
-    signPosition: [-SIDE_OFFSET + SIGN_OFFSET, 0, 105],
+    signPosition: [-SIDE_OFFSET + SIGN_OFFSET, 0, 44],
     placeholderColor: '#8c9bb1',
     meshyAnchor: 'building-aiv',
   },
@@ -66,9 +66,9 @@ export const CAREER_STOPS: ICareerStop[] = [
     id: 'fastcampus',
     company: '패스트캠퍼스',
     modalKey: MODAL_KEY.CAREER_FASTCAMPUS,
-    position: [SIDE_OFFSET, 0, 120],
+    position: [SIDE_OFFSET, 0, 52],
     signRotationY: -Math.PI / 2,
-    signPosition: [SIDE_OFFSET - SIGN_OFFSET, 0, 120],
+    signPosition: [SIDE_OFFSET - SIGN_OFFSET, 0, 52],
     placeholderColor: '#c8a6f0',
     meshyAnchor: 'building-fastcampus',
   },
@@ -76,9 +76,9 @@ export const CAREER_STOPS: ICareerStop[] = [
     id: 'muhayu',
     company: '(주)무하유',
     modalKey: MODAL_KEY.CAREER_MUHAYU,
-    position: [-SIDE_OFFSET, 0, 135],
+    position: [-SIDE_OFFSET, 0, 60],
     signRotationY: Math.PI / 2,
-    signPosition: [-SIDE_OFFSET + SIGN_OFFSET, 0, 135],
+    signPosition: [-SIDE_OFFSET + SIGN_OFFSET, 0, 60],
     placeholderColor: '#90c7e8',
     meshyAnchor: 'building-muhayu',
   },
@@ -86,9 +86,9 @@ export const CAREER_STOPS: ICareerStop[] = [
     id: 'archidraw',
     company: '(주)아키드로우',
     modalKey: MODAL_KEY.CAREER_ARCHIDRAW,
-    position: [SIDE_OFFSET, 0, 150],
+    position: [SIDE_OFFSET, 0, 68],
     signRotationY: -Math.PI / 2,
-    signPosition: [SIDE_OFFSET - SIGN_OFFSET, 0, 150],
+    signPosition: [SIDE_OFFSET - SIGN_OFFSET, 0, 68],
     placeholderColor: '#d9b58a',
     meshyAnchor: 'building-archidraw',
   },
@@ -96,9 +96,9 @@ export const CAREER_STOPS: ICareerStop[] = [
     id: 'lab724',
     company: '724랩',
     modalKey: MODAL_KEY.CAREER_LAB724,
-    position: [-SIDE_OFFSET, 0, 165],
+    position: [-SIDE_OFFSET, 0, 74],
     signRotationY: Math.PI / 2,
-    signPosition: [-SIDE_OFFSET + SIGN_OFFSET, 0, 165],
+    signPosition: [-SIDE_OFFSET + SIGN_OFFSET, 0, 74],
     placeholderColor: '#f2c38a',
     meshyAnchor: 'building-lab724',
   },

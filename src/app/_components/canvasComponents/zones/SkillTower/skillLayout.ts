@@ -93,6 +93,6 @@ export const SKILL_TOWER_LEVELS: ISkillTowerLevel[] = [
 ];
 
 export const SKILL_TOWER_POSITION = {
-  x: 85,
-  z: 85,
+  x: -35,
+  z: 55,
 } as const;
