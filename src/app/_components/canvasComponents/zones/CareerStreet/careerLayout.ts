@@ -41,65 +41,75 @@ const SIGN_OFFSET = 4;
 export const CAREER_STREET_START_Z = 32;
 export const CAREER_STREET_END_Z = 80;
 
+/**
+ * 거리 배치 규칙:
+ * - 중앙(z=허브)에 가까울수록 과거, 끝(z 큼)일수록 현재/미래.
+ * - 좌우(+x / -x)는 시각적 리듬을 위한 단순 alternating.
+ *
+ * 시간순 (과거 → 현재):
+ *   lab724 (2020.03~2021.02) → archidraw (2022.05~2023.06)
+ *   → muhayu (2023.07~2023.11) → fastcampus (2023.10~2024.03)
+ *   → aiv (2023.12~2024.12) → miridih (2025.01~현재)
+ */
 export const CAREER_STOPS: ICareerStop[] = [
   {
-    id: 'miridih',
-    company: '미리디',
-    modalKey: MODAL_KEY.CAREER_MIRIDIH,
+    id: 'lab724',
+    company: '724랩',
+    modalKey: MODAL_KEY.CAREER_LAB724,
     position: [SIDE_OFFSET, 0, 36],
     signRotationY: -Math.PI / 2,
     signPosition: [SIDE_OFFSET - SIGN_OFFSET, 0, 36],
-    placeholderColor: '#f3b6d8',
-    meshyAnchor: 'building-miridih',
-  },
-  {
-    id: 'aiv',
-    company: '(주)아이브',
-    modalKey: MODAL_KEY.CAREER_AIV,
-    position: [-SIDE_OFFSET, 0, 44],
-    signRotationY: Math.PI / 2,
-    signPosition: [-SIDE_OFFSET + SIGN_OFFSET, 0, 44],
-    placeholderColor: '#8c9bb1',
-    meshyAnchor: 'building-aiv',
-  },
-  {
-    id: 'fastcampus',
-    company: '패스트캠퍼스',
-    modalKey: MODAL_KEY.CAREER_FASTCAMPUS,
-    position: [SIDE_OFFSET, 0, 52],
-    signRotationY: -Math.PI / 2,
-    signPosition: [SIDE_OFFSET - SIGN_OFFSET, 0, 52],
-    placeholderColor: '#c8a6f0',
-    meshyAnchor: 'building-fastcampus',
-  },
-  {
-    id: 'muhayu',
-    company: '(주)무하유',
-    modalKey: MODAL_KEY.CAREER_MUHAYU,
-    position: [-SIDE_OFFSET, 0, 60],
-    signRotationY: Math.PI / 2,
-    signPosition: [-SIDE_OFFSET + SIGN_OFFSET, 0, 60],
-    placeholderColor: '#90c7e8',
-    meshyAnchor: 'building-muhayu',
+    placeholderColor: '#f2c38a',
+    meshyAnchor: 'building-lab724',
   },
   {
     id: 'archidraw',
     company: '(주)아키드로우',
     modalKey: MODAL_KEY.CAREER_ARCHIDRAW,
-    position: [SIDE_OFFSET, 0, 68],
-    signRotationY: -Math.PI / 2,
-    signPosition: [SIDE_OFFSET - SIGN_OFFSET, 0, 68],
+    position: [-SIDE_OFFSET, 0, 44],
+    signRotationY: Math.PI / 2,
+    signPosition: [-SIDE_OFFSET + SIGN_OFFSET, 0, 44],
     placeholderColor: '#d9b58a',
     meshyAnchor: 'building-archidraw',
   },
   {
-    id: 'lab724',
-    company: '724랩',
-    modalKey: MODAL_KEY.CAREER_LAB724,
+    id: 'muhayu',
+    company: '(주)무하유',
+    modalKey: MODAL_KEY.CAREER_MUHAYU,
+    position: [SIDE_OFFSET, 0, 52],
+    signRotationY: -Math.PI / 2,
+    signPosition: [SIDE_OFFSET - SIGN_OFFSET, 0, 52],
+    placeholderColor: '#90c7e8',
+    meshyAnchor: 'building-muhayu',
+  },
+  {
+    id: 'fastcampus',
+    company: '패스트캠퍼스',
+    modalKey: MODAL_KEY.CAREER_FASTCAMPUS,
+    position: [-SIDE_OFFSET, 0, 60],
+    signRotationY: Math.PI / 2,
+    signPosition: [-SIDE_OFFSET + SIGN_OFFSET, 0, 60],
+    placeholderColor: '#c8a6f0',
+    meshyAnchor: 'building-fastcampus',
+  },
+  {
+    id: 'aiv',
+    company: '(주)아이브',
+    modalKey: MODAL_KEY.CAREER_AIV,
+    position: [SIDE_OFFSET, 0, 68],
+    signRotationY: -Math.PI / 2,
+    signPosition: [SIDE_OFFSET - SIGN_OFFSET, 0, 68],
+    placeholderColor: '#8c9bb1',
+    meshyAnchor: 'building-aiv',
+  },
+  {
+    id: 'miridih',
+    company: '미리디',
+    modalKey: MODAL_KEY.CAREER_MIRIDIH,
     position: [-SIDE_OFFSET, 0, 74],
     signRotationY: Math.PI / 2,
     signPosition: [-SIDE_OFFSET + SIGN_OFFSET, 0, 74],
-    placeholderColor: '#f2c38a',
-    meshyAnchor: 'building-lab724',
+    placeholderColor: '#f3b6d8',
+    meshyAnchor: 'building-miridih',
   },
 ];

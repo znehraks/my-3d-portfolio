@@ -1,47 +1,45 @@
 import { IPosition } from '@/types';
 import { WoodenSign } from '../../groundObjects/WoodenSign';
-import { HALL_OF_FAME_POSITION, HALL_OF_FAME_STOPS } from './hallOfFameLayout';
+import { GLBProp } from '../../glb/GLBProp';
+import { StreetLamp } from '../../lighting/StreetLamp';
+import { HALL_OF_FAME_POSITION, HALL_OF_FAME_STOPS, HallOfFameAnchor } from './hallOfFameLayout';
 
-const TEMPLE_ROOF_Y = 10;
-const TEMPLE_WIDTH = 32;
-const TEMPLE_DEPTH = 20;
-const COLUMN_POSITIONS: IPosition[] = [
-  [-TEMPLE_WIDTH / 2 + 1, 4, -TEMPLE_DEPTH / 2 + 1],
-  [TEMPLE_WIDTH / 2 - 1, 4, -TEMPLE_DEPTH / 2 + 1],
-  [-TEMPLE_WIDTH / 2 + 1, 4, TEMPLE_DEPTH / 2 - 1],
-  [TEMPLE_WIDTH / 2 - 1, 4, TEMPLE_DEPTH / 2 - 1],
+// 전시 오브젝트(트로피 3개) 전방을 비추는 가로등 2개.
+// 좌표는 HallOfFame 그룹 로컬 기준 (허브→HOF 중심 오프셋 제외).
+const HOF_LAMP_LOCAL: IPosition[] = [
+  [-10, 0, -7],
+  [10, 0, -7],
 ];
+
+const ANCHOR_GLB: Partial<Record<HallOfFameAnchor, string>> = {
+  'trophy-gold': '/models/trophy_gold.glb',
+  'trophy-silver': '/models/trophy_silver.glb',
+  'certificate-frame': '/models/certificate_frame.glb',
+};
+
+const ANCHOR_SCALE: Partial<Record<HallOfFameAnchor, number>> = {
+  'trophy-gold': 4.5,
+  'trophy-silver': 4,
+  'certificate-frame': 3.5,
+};
 
 export function HallOfFame() {
   const { x: cx, z: cz } = HALL_OF_FAME_POSITION;
 
   return (
     <group position={[cx, 0, cz]}>
-      {/* 🧩 Placeholder — replace with Meshy asset per docs/meshy-assets.md#hall-temple */}
-      <mesh castShadow receiveShadow position={[0, TEMPLE_ROOF_Y, 0]}>
-        <boxGeometry args={[TEMPLE_WIDTH, 0.8, TEMPLE_DEPTH]} />
-        <meshStandardMaterial color="#f4f1e4" />
-      </mesh>
-      {COLUMN_POSITIONS.map((p, i) => (
-        <mesh key={`hof-col-${i}`} castShadow receiveShadow position={p}>
-          <cylinderGeometry args={[0.6, 0.8, 8, 16]} />
-          <meshStandardMaterial color="#ece6cf" />
-        </mesh>
+      {HOF_LAMP_LOCAL.map((pos, i) => (
+        <StreetLamp key={`hof-lamp-${i}`} position={pos} color="#ffe6a8" />
       ))}
 
       {HALL_OF_FAME_STOPS.map((stop) => {
-        // 좌표는 월드 기준이므로, 그룹 offset 을 역으로 빼서 로컬로 환산한다.
-        const localProp: IPosition = [stop.position[0] - cx, stop.position[1], stop.position[2] - cz];
+        const localProp: IPosition = [stop.position[0] - cx, 0, stop.position[2] - cz];
         const localSign: IPosition = [stop.signPosition[0] - cx, stop.signPosition[1], stop.signPosition[2] - cz];
+        const glb = ANCHOR_GLB[stop.propAnchor];
+        const glbScale = ANCHOR_SCALE[stop.propAnchor] ?? 1;
         return (
           <group key={stop.id}>
-            {/* 🧩 Placeholder — replace with Meshy asset per docs/meshy-assets.md#<propAnchor>.
-                propAnchor 후보: trophy-gold / trophy-silver / trophy-bronze /
-                certificate-frame / graduation-cap (hallOfFameLayout.ts 의 stop.propAnchor 참조). */}
-            <mesh castShadow receiveShadow position={localProp}>
-              <boxGeometry args={stop.boxSize} />
-              <meshStandardMaterial color={stop.placeholderColor} />
-            </mesh>
+            {glb && <GLBProp src={glb} position={localProp} scale={glbScale} />}
             <WoodenSign
               position={localSign}
               modalKey={stop.modalKey}

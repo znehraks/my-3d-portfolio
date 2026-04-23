@@ -9,6 +9,10 @@ import { WoodenSign } from './WoodenSign';
 import { SkillTower } from '../zones/SkillTower/SkillTower';
 import { CareerStreet } from '../zones/CareerStreet/CareerStreet';
 import { HallOfFame } from '../zones/HallOfFame/HallOfFame';
+import { HubProps } from '../zones/Hub/HubProps';
+import { ContentCityProps } from '../zones/ContentCity/ContentCityProps';
+import { PlaygroundProps } from '../zones/Playground/PlaygroundProps';
+import { IslandGlow } from '../lighting/IslandGlow';
 import {
   TechIsland,
   ContentIsland,
@@ -16,6 +20,7 @@ import {
 } from './ground/Islands';
 import { CentralPlaza } from './ground/CentralPlaza';
 import { Ambience } from './ground/Ambience';
+import { AmbientDetails } from './ground/AmbientDetails';
 import {
   GateTech,
   GateContent,
@@ -43,6 +48,10 @@ export function GroundObjects() {
     <>
       {/* === 환경 배경 (바다 + 구름 + 덩굴 + 부속 바위 + 폭포) === */}
       <Ambience />
+      <AmbientDetails />
+
+      {/* === 섬별 야경 앰비언트 조명 (은은한 색조) === */}
+      <IslandGlow />
 
       {/* === 바닥 (자유형 섬 3 + 허브 광장). 허브↔섬 연결은 Path 의 돌 타일이 담당 === */}
       <TechIsland />
@@ -53,6 +62,7 @@ export function GroundObjects() {
       {/* === 중앙 허브 === */}
       <CentralFountain />
       <DirectionSignpost />
+      <HubProps />
 
       {/* === 도시 게이트 === */}
       <GateTech />
@@ -72,11 +82,13 @@ export function GroundObjects() {
       <Stage88ight />
       <ArcadeMemepush />
       <BoothComingSoon />
+      <ContentCityProps />
 
       {/* === Playground (0.45x 재배치) === */}
       <JungleGym />
       <Slide />
       <Swing />
+      <PlaygroundProps />
       <PineTrees position={[80, 0, -80]} />
       <Tree position={[25, 0, -20]} />
       <Tree position={[70, 0, -35]} />

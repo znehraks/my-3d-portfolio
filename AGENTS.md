@@ -4,6 +4,15 @@ DO NOT STOP TO ASK "SHOULD I PROCEED?" — PROCEED. DO NOT WAIT FOR CONFIRMATION
 IF BLOCKED, TRY AN ALTERNATIVE APPROACH. ONLY ASK WHEN TRULY AMBIGUOUS OR DESTRUCTIVE.
 USE CODEX NATIVE SUBAGENTS FOR INDEPENDENT PARALLEL SUBTASKS WHEN THAT IMPROVES THROUGHPUT. THIS IS COMPLEMENTARY TO OMX TEAM MODE.
 <!-- END AUTONOMY DIRECTIVE -->
+
+<!-- GIT WORKFLOW DIRECTIVE — DO NOT REMOVE -->
+EVERY TASK MUST END WITH A GIT COMMIT AND PUSH TO THE CURRENT BRANCH.
+- After completing each user task (feature, fix, chore, refactor, doc), run `git add` on the relevant changes, create a commit with a concise message describing the change, and push to the current remote branch.
+- Do NOT skip the commit/push step even for small or in-progress changes, unless the user explicitly says otherwise.
+- If the working tree has no staged changes (nothing to commit), report that explicitly instead of silently skipping.
+- Never use `--no-verify` or force-push; if a hook fails, fix the underlying issue and create a new commit.
+<!-- END GIT WORKFLOW DIRECTIVE -->
+
 <!-- omx:generated:agents-md -->
 
 # oh-my-codex - Intelligent Multi-Agent Orchestration

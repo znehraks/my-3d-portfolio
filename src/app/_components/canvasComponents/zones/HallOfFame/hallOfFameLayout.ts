@@ -13,7 +13,6 @@ export type HallOfFameAnchor =
   | 'hall-temple'
   | 'trophy-gold'
   | 'trophy-silver'
-  | 'trophy-bronze'
   | 'certificate-frame'
   | 'graduation-cap'
   | 'pedestal';

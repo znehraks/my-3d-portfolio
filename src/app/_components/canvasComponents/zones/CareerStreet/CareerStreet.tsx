@@ -2,53 +2,36 @@ import { useGLTF, Instances, Instance } from '@react-three/drei';
 import { useMemo } from 'react';
 import { Mesh } from 'three';
 import { WoodenSign } from '../../groundObjects/WoodenSign';
+import { GLBProp } from '../../glb/GLBProp';
+import { StreetLamp } from '../../lighting/StreetLamp';
 import { IPosition } from '@/types';
 import {
   CAREER_STOPS,
   CAREER_STREET_END_Z,
-  CAREER_STREET_START_Z,
+  CareerBuildingAnchor,
   ICareerStop,
 } from './careerLayout';
 
-const BUILDING_SCALE: IPosition = [10, 12, 10];
+const BUILDING_GLB: Partial<Record<CareerBuildingAnchor, string>> = {
+  'building-muhayu': '/models/building_muhayu.glb',
+  'building-lab724': '/models/building_lab724.glb',
+  'building-aiv': '/models/building_aiv.glb',
+  'building-archidraw': '/models/building_archisketch.glb',
+};
+const BUILDING_GLB_SCALE = 8;
+
+// 거리를 따라 3개 가로등 (stop 사이 중간 지점, 좌우 교차)
+const CAREER_STREET_LAMPS: IPosition[] = [
+  [4, 0, 40],
+  [-4, 0, 56],
+  [4, 0, 72],
+];
 
 function CareerBuilding({ stop }: { stop: ICareerStop }) {
   const [x, , z] = stop.position;
-  return (
-    <group position={[x, BUILDING_SCALE[1] / 2, z]}>
-      {/* 🧩 Placeholder — replace with Meshy asset per docs/meshy-assets.md#${anchor}
-          실제 Meshy 건물 모델 교체 시 이 박스 전체를 `<primitive object={scene} ... />` 로 바꾼다. */}
-      <mesh castShadow receiveShadow>
-        <boxGeometry args={BUILDING_SCALE} />
-        <meshStandardMaterial color={stop.placeholderColor} />
-      </mesh>
-      {/* 색깔만으로 구분이 어려우므로 회사명 라벨 역할의 작은 보조 박스 */}
-      <mesh position={[0, BUILDING_SCALE[1] / 2 + 1, 0]}>
-        <boxGeometry args={[6, 1.5, 0.3]} />
-        <meshStandardMaterial color="#fffcea" />
-      </mesh>
-    </group>
-  );
-}
-
-function TimelineArrowSign() {
-  // 🧩 Placeholder — replace with Meshy asset per docs/meshy-assets.md#sign-timeline-arrow
-  return (
-    <group position={[0, 2, CAREER_STREET_START_Z - 8]}>
-      <mesh castShadow>
-        <boxGeometry args={[6, 1.2, 0.4]} />
-        <meshStandardMaterial color="#a6702f" />
-      </mesh>
-      <mesh position={[3.4, 0, 0]} rotation={[0, 0, -Math.PI / 4]}>
-        <coneGeometry args={[0.8, 1.6, 4]} />
-        <meshStandardMaterial color="#a6702f" />
-      </mesh>
-      <mesh position={[0, -1.6, 0]}>
-        <cylinderGeometry args={[0.2, 0.25, 3, 8]} />
-        <meshStandardMaterial color="#6b4a1a" />
-      </mesh>
-    </group>
-  );
+  const glb = BUILDING_GLB[stop.meshyAnchor];
+  if (!glb) return null;
+  return <GLBProp src={glb} position={[x, 0, z]} scale={BUILDING_GLB_SCALE} />;
 }
 
 function StreetPath() {
@@ -86,7 +69,9 @@ export function CareerStreet() {
   return (
     <group>
       <StreetPath />
-      <TimelineArrowSign />
+      {CAREER_STREET_LAMPS.map((pos, i) => (
+        <StreetLamp key={`career-lamp-${i}`} position={pos} />
+      ))}
       {CAREER_STOPS.map((stop) => (
         <group key={stop.id}>
           <CareerBuilding stop={stop} />
